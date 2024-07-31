@@ -1,10 +1,6 @@
 function solution(line) {
-  input = line.split(' ');
-  const a = Number(input[0]);
-  const b = Number(input[1]);
-  const result = a + b;
-
-  console.log(`${a} + ${b} = ${result}`);
+  const [a, b] = line.split(' ');
+  console.log(`${Number(a)} + ${Number(b)} = ${Number(a) + Number(b)}`);
 }
 
 solution('4 5');
