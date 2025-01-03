@@ -1,33 +1,40 @@
 function solution(n) {
+  const move = [
+    [0, 1],
+    [1, 0],
+    [0, -1],
+    [-1, 0],
+  ];
   const answer = Array.from({ length: n }, () => Array(n).fill(0));
-  let row = 0;
+
+  let x = 0;
+  let y = 0;
+  let dir = 0;
   let num = 1;
 
   while (num <= n * n) {
-    for (let i = row; i < n - row; i++) {
-      answer[row][i] = num;
-      num++;
+    answer[x][y] = num;
+    let nextX = x + move[dir][0];
+    let nextY = y + move[dir][1];
+
+    if (
+      nextX >= n ||
+      nextX < 0 ||
+      nextY >= n ||
+      nextY < 0 ||
+      answer[nextX][nextY] !== 0
+    ) {
+      dir = (dir + 1) % 4;
+      nextX = x + move[dir][0];
+      nextY = y + move[dir][1];
     }
 
-    for (let i = row + 1; i < n - row; i++) {
-      answer[i][n - 1 - row] = num;
-      num++;
-    }
-
-    for (let i = n - row - 2; i >= row; i--) {
-      answer[n - 1 - row][i] = num;
-      num++;
-    }
-
-    for (let i = n - row - 2; i > row; i--) {
-      answer[i][row] = num;
-      num++;
-    }
-
-    row++;
+    x = nextX;
+    y = nextY;
+    num++;
   }
 
-  return answer;
+  console.log(answer);
 }
 
 solution(4);
